@@ -1,0 +1,13 @@
+<h1>
+  Here are all your recipes!
+</h1>
+<!-- <%= Time.now %> -->
+<ol>
+  <% @recipes.each_with_index do |recipe, index| %>
+    <li>
+       <%= recipe.name %> <a href="/destroy/<%=index%>">  Destroy recipe</a>
+    </li>
+  <% end %>
+</ol>
+
+<a href="/new">Add a new recipe here</a>
