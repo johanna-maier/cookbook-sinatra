@@ -21,14 +21,16 @@ class Cookbook
   end
 
   def remove_recipe(recipe_index)
+
     @recipes.delete_at(recipe_index)
+
     save_csv if @csv_file_path
     # remove recipe from CSV
   end
 
   def mark_completed(recipe_index)
-    recipe = @recipes[recipe_index]
-    recipe.completed = true
+    @recipes[recipe_index].mark_completed!
+    save_csv if @csv_file_path
   end
 
   private

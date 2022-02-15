@@ -50,6 +50,15 @@ get '/destroy/:index' do
   redirect '/'
 end
 
+get '/done/:index' do
+  @cookbook = Cookbook.new('recipes.csv')
+  @index = params[:index].to_i
+       pry.binding
+  @cookbook.mark_completed(@index)
+       pry.binding
+  redirect '/'
+end
+
 get '/import' do
   erb :import
 end

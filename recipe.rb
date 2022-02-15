@@ -6,8 +6,12 @@ class Recipe
     @name = attributes[:name]
     @description = attributes[:description]
     @rating = attributes[:rating]
-    @completed = attributes[:completed].nil? ? false : attributes[:name]
+    @completed = attributes[:completed] || false
     @prep_time = attributes[:prep_time]
+  end
+
+  def mark_completed!
+    @completed = true
   end
 end
 

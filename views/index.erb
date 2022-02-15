@@ -2,10 +2,14 @@
   Here are all your recipes!
 </h1>
 <!-- <%= Time.now %> -->
+
 <ol>
   <% @recipes.each_with_index do |recipe, index| %>
+
     <li>
-       <%= recipe.name %> <a href="/destroy/<%=index%>">  Destroy recipe</a>
+    [<%= recipe.completed == true ? "x" : " "%>]
+     <%=recipe.name %> | <a href="/destroy/<%=index%>">  Destroy</a>
+     | <a href="/done/<%=index%>"> Mark done</a>
     </li>
   <% end %>
 </ol>
