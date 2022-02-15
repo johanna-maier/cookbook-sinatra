@@ -9,7 +9,7 @@ require 'nokogiri'
 require 'open-uri'
 
 set bind: 'localhost'
-set port: 7655
+set port: 7500
 
 configure :development do
   use BetterErrors::Middleware
@@ -27,6 +27,7 @@ get '/new' do
   erb :new
 end
 
+
 post '/recipes' do
   @cookbook = Cookbook.new('recipes.csv')
 
@@ -42,9 +43,32 @@ post '/recipes' do
   redirect '/'
 end
 
-get "/destroy/:index" do
+get '/destroy/:index' do
   @cookbook = Cookbook.new('recipes.csv')
   @index = params[:index].to_i
   @cookbook.remove_recipe(@index)
+  redirect '/'
+end
+
+get '/import' do
+  erb :import
+end
+
+post '/importrecipe' do
+  @cookbook = Cookbook.new('recipes.csv')
+  @keyword = params[:keyword]
+  @recipe_instances = ScrapeAllrecipesService.new(@keyword).call
+  erb :importindex
+
+end
+
+post '/new-web-recipe' do
+  @cookbook = Cookbook.new('recipes.csv')
+  @keyword = params[:keyword]
+  @index = params[:index]
+  @recipe_instances = ScrapeAllrecipesService.new(@keyword).call
+
+  @cookbook.add_recipe(@recipe_instances[@index.to_i - 1])
+
   redirect '/'
 end

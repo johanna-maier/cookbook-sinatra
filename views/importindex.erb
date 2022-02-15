@@ -1,0 +1,20 @@
+<h1>
+Which recipe do you want to import?
+</h1>
+<!-- <%= Time.now %> -->
+<ol>
+  <% @recipe_instances.each_with_index do |recipe, index| %>
+    <li>
+       <%= recipe.name %>
+    </li>
+  <% end %>
+</ol>
+
+<form action="/new-web-recipe" method="post">
+  <label for="keyword">Your keyword is: </label><br>
+  <input type="text" id="keyword" name="keyword" value="<%=@keyword%>"><br>
+  <label for="index">Index:</label><br>
+  <input type="text" id="index" name="index"><br>
+
+  <input type="submit" value="Submit" ><br>
+</form>
